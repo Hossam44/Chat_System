@@ -54,17 +54,6 @@ class Message < ApplicationRecord
     )
   end
 
-  def update_and_reindex(params)
-    # Delete the old document from Elasticsearch if it exists
-    __elasticsearch__.delete_document if persisted?
-
-    # Update the message attributes
-    update(params)
-
-    # Reindex the new message if valid
-    __elasticsearch__.index_document if valid?
-  end
-
   private
 
   def reindex

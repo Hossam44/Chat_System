@@ -10,7 +10,6 @@ class MessageUpdateWorker
         # Attempt to update the message
         if message.update(updates)
           Rails.logger.info("Message with ID #{message_id} updated successfully.")
-          message.update_and_reindex(updates)
         else
           Rails.logger.error("Failed to update message with ID #{message_id}: #{message.errors.full_messages.join(", ")}")
         end
